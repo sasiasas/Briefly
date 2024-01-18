@@ -1,0 +1,27 @@
+trigger:
+- master
+
+variables:
+  vmImageName: 'ubuntu-latest'
+  pythonVersion: '3.7'
+
+stages:
+- stage: Compilation
+  displayName: Compilation stage
+  jobs:
+  - job: CompilationJob
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '$(pythonVersion)'
+      displayName: 'Use Python $(pythonVersion)'
+
+    - script: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+      displayName: 'Install dependencies'
+
+    - script: python -m py_compile app.py
+      displayName: 'Test compilation'
