@@ -20,8 +20,8 @@ stages:
 
     - script: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r flight_price_prediction/requirements.txt
       displayName: 'Install dependencies'
 
-    - script: python -m py_compile app.py
+    - script: python -m py_compile flight_price_prediction/app.py
       displayName: 'Test compilation'
